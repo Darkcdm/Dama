@@ -1,9 +1,12 @@
 //checkers
 
 let GameArea = {
-	size: 10,
+	size: 8,
+	GameArea: document.createElement("div"),
+	GameBoard: document.createElement("table"),
 
-	renderGameArea: function () {},
+	load: function () {},
+	renderGameBoard: function () {},
 };
 
 class GamePiece {
@@ -13,6 +16,8 @@ class GamePiece {
 		this.y = y;
 		this.id = id;
 	}
+	showPossibleMoves() {}
+	movePiece() {}
 }
 
 let Pairing = {
