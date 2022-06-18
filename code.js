@@ -1,12 +1,31 @@
 //checkers
 
-let GameArea = {
-	size: 8,
-	GameArea: document.createElement("div"),
-	GameBoard: document.createElement("table"),
+let Game = {
+	windowSize: window.innerWidth,
+	cellSize: this.windowSize / this.gameBoardSize,
+	gameBoardSize: 8,
 
-	load: function () {},
-	renderGameBoard: function () {},
+	gameArea: document.createElement("div"),
+	gameBoard: document.createElement("table"),
+
+	load: function () {
+		this.renderGameBoard();
+	},
+	renderGameBoard: function () {
+		for (let y = 0; y < this.gameBoardSize; y++) {
+			let row = document.createElement("tr");
+			for (let x = 0; x < this.gameBoardSize; x++) {
+				let cell = document.createElement("td");
+				row.appendChild(cell);
+			}
+			this.gameBoard.appendChild(row);
+		}
+		this.gameBoard.width = "100%";
+		this.gameBoard.height = "64";
+
+		this.gameArea.appendChild(this.gameBoard);
+		document.getElementById("body").appendChild(this.gameArea);
+	},
 };
 
 class GamePiece {
