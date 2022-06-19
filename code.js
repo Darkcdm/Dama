@@ -16,6 +16,22 @@ let Game = {
 			let row = document.createElement("tr");
 			for (let x = 0; x < this.gameBoardSize; x++) {
 				let cell = document.createElement("td");
+				let img = document.createElement("img");
+
+				if (x % 2 == 0) {
+					if (y % 2 == 0) {
+						img.src = "img/WhiteSqr.png";
+					} else {
+						img.src = "img/BlackSqr.png";
+					}
+				} else {
+					if (y % 2 == 1) {
+						img.src = "img/WhiteSqr.png";
+					} else {
+						img.src = "img/BlackSqr.png";
+					}
+				}
+				cell.appendChild(img);
 				row.appendChild(cell);
 			}
 			this.gameBoard.appendChild(row);
