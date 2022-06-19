@@ -20,9 +20,6 @@ let Game = {
 			}
 			this.gameBoard.appendChild(row);
 		}
-		this.gameBoard.width = "100%";
-		this.gameBoard.height = "64";
-
 		this.gameArea.appendChild(this.gameBoard);
 		document.getElementById("body").appendChild(this.gameArea);
 	},
@@ -114,3 +111,7 @@ let Pairing = {
 			----------
 	*/
 };
+
+function test(a) {
+	console.log(a % 2);
+}
