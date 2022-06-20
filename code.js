@@ -4,11 +4,12 @@ let Game = {
 	windowSize: window.innerWidth,
 	cellSize: this.windowSize / this.gameBoardSize,
 	gameBoardSize: 8,
-
+	gamePieces: [],
 	gameArea: document.createElement("div"),
 	gameBoard: document.createElement("table"),
 
 	load: function () {
+		this.setGameBoard();
 		this.renderGameBoard();
 	},
 	renderGameBoard: function () {
@@ -17,6 +18,8 @@ let Game = {
 			for (let x = 0; x < this.gameBoardSize; x++) {
 				let cell = document.createElement("td");
 				let img = document.createElement("img");
+
+				img.id = Pairing.getID(x, y);
 
 				if (x % 2 == 0) {
 					if (y % 2 == 0) {
@@ -38,6 +41,26 @@ let Game = {
 		}
 		this.gameArea.appendChild(this.gameBoard);
 		document.getElementById("body").appendChild(this.gameArea);
+	},
+	setGameBoard: function () {
+		//set red
+		for (y = 0; y < 2; y++) {
+			for (x = 0; x < this.gameBoardSize; x++) {
+				let piece = new GamePiece("RED", x, y, Pairing.getID(x, y));
+
+				this.gamePieces.push(piece);
+			}
+		}
+
+		//set blue
+		for (y = 6; y < 8; y++) {
+			for (x = 0; x < this.gameBoardSize; x++) {
+				let piece = new GamePiece("BLUE", x, y, Pairing.getID(x, y));
+
+				this.gamePieces.push(piece);
+			}
+		}
+		return this.gamePieces;
 	},
 };
 
