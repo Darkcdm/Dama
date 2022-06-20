@@ -13,20 +13,17 @@ let Game = {
 		this.renderBoard();
 	},
 	renderBoard: function () {
+		this.removeOldArea();
+
 		for (let y = 0; y < this.boardSize; y++) {
 			let row = document.createElement("tr");
 			for (let x = 0; x < this.boardSize; x++) {
-				oldCell = document.getElementById(Pairing.getID(x, y));
-				if (oldCell) {
-					oldCell.remove();
-				}
-
 				let cell = document.createElement("td");
 				let img = document.createElement("img");
 
 				img.id = Pairing.getID(x, y);
 
-				img.src = decideCellSrc(x, y);
+				img.src = this.decideCellSrc(x, y);
 				cell.appendChild(img);
 				row.appendChild(cell);
 			}
@@ -56,6 +53,22 @@ let Game = {
 			}
 		}
 		return this.pieces;
+	},
+
+	removeOldArea: function () {
+		while (this.area.firstChild) {
+			this.removeAllChildrenRecursively(this.area.firstChild);
+		}
+	},
+	removeAllChildrenRecursively: function (parent) {
+		if (parent.firstChild.firstChild != null) {
+			this.removeAllChildrenRecursively(parent.firstChild.firstChild);
+		} else {
+			while (parent.firstChild) {
+				parent.removeChild(parent.firstChild);
+			}
+			parent.remove();
+		}
 	},
 	decideCellSrc: function (x, y) {
 		if (x % 2 == 0) {
@@ -162,5 +175,11 @@ let Pairing = {
 };
 
 function test(a) {
-	console.log(a % 2);
+	if (a > 0) {
+		a--;
+		console.log(a);
+		test(a);
+	} else {
+		return a;
+	}
 }
