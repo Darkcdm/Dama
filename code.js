@@ -16,24 +16,17 @@ let Game = {
 		for (let y = 0; y < this.boardSize; y++) {
 			let row = document.createElement("tr");
 			for (let x = 0; x < this.boardSize; x++) {
+				oldCell = document.getElementById(Pairing.getID(x, y));
+				if (oldCell) {
+					oldCell.remove();
+				}
+
 				let cell = document.createElement("td");
 				let img = document.createElement("img");
 
 				img.id = Pairing.getID(x, y);
 
-				if (x % 2 == 0) {
-					if (y % 2 == 0) {
-						img.src = "img/WhiteSqr.png";
-					} else {
-						img.src = "img/BlackSqr.png";
-					}
-				} else {
-					if (y % 2 == 1) {
-						img.src = "img/WhiteSqr.png";
-					} else {
-						img.src = "img/BlackSqr.png";
-					}
-				}
+				img.src = decideCellSrc(x, y);
 				cell.appendChild(img);
 				row.appendChild(cell);
 			}
@@ -63,6 +56,21 @@ let Game = {
 			}
 		}
 		return this.pieces;
+	},
+	decideCellSrc: function (x, y) {
+		if (x % 2 == 0) {
+			if (y % 2 == 0) {
+				return "img/WhiteSqr.png";
+			} else {
+				return "img/BlackSqr.png";
+			}
+		} else {
+			if (y % 2 == 1) {
+				return "img/WhiteSqr.png";
+			} else {
+				return "img/BlackSqr.png";
+			}
+		}
 	},
 };
 
