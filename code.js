@@ -36,20 +36,34 @@ let Game = {
 	},
 	setBoard: function () {
 		//set red
-		for (y = 0; y < 2; y++) {
+		for (y = 0; y < 3; y++) {
 			for (x = 0; x < this.boardSize; x++) {
-				let piece = new GamePiece("RED", x, y, Pairing.getID(x, y));
-
-				this.pieces.push(piece);
+				if (y == 0 && x % 2 == 1) {
+					let piece = new GamePiece("RED", x, y, Pairing.getID(x, y));
+					this.pieces.push(piece);
+				} else if (y == 1 && x % 2 == 0) {
+					let piece = new GamePiece("RED", x, y, Pairing.getID(x, y));
+					this.pieces.push(piece);
+				} else if (y == 2 && x % 2 == 1) {
+					let piece = new GamePiece("RED", x, y, Pairing.getID(x, y));
+					this.pieces.push(piece);
+				}
 			}
 		}
 
 		//set blue
-		for (y = 6; y < 8; y++) {
+		for (y = 5; y < 8; y++) {
 			for (x = 0; x < this.boardSize; x++) {
-				let piece = new GamePiece("BLUE", x, y, Pairing.getID(x, y));
-
-				this.pieces.push(piece);
+				if (y == 5 && x % 2 == 0) {
+					let piece = new GamePiece("BLUE", x, y, Pairing.getID(x, y));
+					this.pieces.push(piece);
+				} else if (y == 6 && x % 2 == 1) {
+					let piece = new GamePiece("BLUE", x, y, Pairing.getID(x, y));
+					this.pieces.push(piece);
+				} else if (y == 7 && x % 2 == 0) {
+					let piece = new GamePiece("BLUE", x, y, Pairing.getID(x, y));
+					this.pieces.push(piece);
+				}
 			}
 		}
 		return this.pieces;
