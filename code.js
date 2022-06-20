@@ -54,7 +54,6 @@ let Game = {
 		}
 		return this.pieces;
 	},
-
 	removeOldArea: function () {
 		while (this.area.firstChild) {
 			this.removeAllChildrenRecursively(this.area.firstChild);
@@ -71,16 +70,52 @@ let Game = {
 		}
 	},
 	decideCellSrc: function (x, y) {
+		let piece;
+		for (i = 0; i < this.pieces.length; i++) {
+			if (this.pieces[i].id == Pairing.getID(x, y)) {
+				piece = this.pieces[i];
+				break;
+			}
+		}
+
 		if (x % 2 == 0) {
 			if (y % 2 == 0) {
+				if (piece) {
+					if (piece.colour == "RED") {
+						return "img/WhiteSqrWithRed.png";
+					} else {
+						return "img/WhiteSqrWithBlue.png";
+					}
+				}
 				return "img/WhiteSqr.png";
 			} else {
+				if (piece) {
+					if (piece.colour == "RED") {
+						return "img/BlackSqrWithRed.png";
+					} else {
+						return "img/BlackSqrWithBlue.png";
+					}
+				}
 				return "img/BlackSqr.png";
 			}
 		} else {
 			if (y % 2 == 1) {
+				if (piece) {
+					if (piece.colour == "RED") {
+						return "img/WhiteSqrWithRed.png";
+					} else {
+						return "img/WhiteSqrWithBlue.png";
+					}
+				}
 				return "img/WhiteSqr.png";
 			} else {
+				if (piece) {
+					if (piece.colour == "RED") {
+						return "img/BlackSqrWithRed.png";
+					} else {
+						return "img/BlackSqrWithBlue.png";
+					}
+				}
 				return "img/BlackSqr.png";
 			}
 		}
