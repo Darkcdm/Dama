@@ -13,6 +13,11 @@ let Game = {
 		this.renderGameBoard();
 	},
 	renderGameBoard: function () {
+		if (this.gameArea != null && this.gameBoard != null) {
+			this.gameArea.remove();
+			this.gameBoard.remove();
+		}
+
 		for (let y = 0; y < this.gameBoardSize; y++) {
 			let row = document.createElement("tr");
 			for (let x = 0; x < this.gameBoardSize; x++) {
