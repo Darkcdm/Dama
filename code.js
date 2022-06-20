@@ -2,25 +2,20 @@
 
 let Game = {
 	windowSize: window.innerWidth,
-	cellSize: this.windowSize / this.gameBoardSize,
-	gameBoardSize: 8,
-	gamePieces: [],
-	gameArea: document.createElement("div"),
-	gameBoard: document.createElement("table"),
+	cellSize: this.windowSize / this.boardSize,
+	boardSize: 8,
+	pieces: [],
+	area: document.createElement("div"),
+	board: document.createElement("table"),
 
 	load: function () {
-		this.setGameBoard();
-		this.renderGameBoard();
+		this.setBoard();
+		this.renderBoard();
 	},
-	renderGameBoard: function () {
-		if (this.gameArea != null && this.gameBoard != null) {
-			this.gameArea.remove();
-			this.gameBoard.remove();
-		}
-
-		for (let y = 0; y < this.gameBoardSize; y++) {
+	renderBoard: function () {
+		for (let y = 0; y < this.boardSize; y++) {
 			let row = document.createElement("tr");
-			for (let x = 0; x < this.gameBoardSize; x++) {
+			for (let x = 0; x < this.boardSize; x++) {
 				let cell = document.createElement("td");
 				let img = document.createElement("img");
 
@@ -42,30 +37,32 @@ let Game = {
 				cell.appendChild(img);
 				row.appendChild(cell);
 			}
-			this.gameBoard.appendChild(row);
+			this.board.appendChild(row);
+			this.board.id = "board";
 		}
-		this.gameArea.appendChild(this.gameBoard);
-		document.getElementById("body").appendChild(this.gameArea);
+		this.area.appendChild(this.board);
+		this.area.id = "area";
+		document.getElementById("body").appendChild(this.area);
 	},
-	setGameBoard: function () {
+	setBoard: function () {
 		//set red
 		for (y = 0; y < 2; y++) {
-			for (x = 0; x < this.gameBoardSize; x++) {
+			for (x = 0; x < this.boardSize; x++) {
 				let piece = new GamePiece("RED", x, y, Pairing.getID(x, y));
 
-				this.gamePieces.push(piece);
+				this.pieces.push(piece);
 			}
 		}
 
 		//set blue
 		for (y = 6; y < 8; y++) {
-			for (x = 0; x < this.gameBoardSize; x++) {
+			for (x = 0; x < this.boardSize; x++) {
 				let piece = new GamePiece("BLUE", x, y, Pairing.getID(x, y));
 
-				this.gamePieces.push(piece);
+				this.pieces.push(piece);
 			}
 		}
-		return this.gamePieces;
+		return this.pieces;
 	},
 };
 
