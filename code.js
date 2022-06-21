@@ -145,14 +145,38 @@ class GamePiece {
 		this.y = y;
 		this.id = id;
 	}
-	showPossibleMoves(piece) {
-		console.log(piece);
-		x = this.x;
-		y = this.y;
-		id = this.id;
+	showPossibleMoves() {
+		console.log(this);
+		if (this.colour == "RED") {
+			this.checkDown();
+		} else {
+			this.checkUp();
+		}
 	}
 	movePiece() {}
+	checkUp() {}
+	checkDown() {
+		x = this.x;
+		y = this.y;
+
+		while (true) {
+			x--;
+			y++;
+			if (x < 0 || y > Game.boardSize) {
+				break;
+			}
+
+			let img = document.getElementById(Pairing.getID(x, y));
+			if (img != null) {
+				img.src = "img/GreenSqr.png";
+			} else {
+				break;
+			}
+		}
+	}
 }
+
+class scan extends GamePiece {}
 
 let Pairing = {
 	getID: function (x, y) {
