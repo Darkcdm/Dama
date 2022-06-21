@@ -20,10 +20,20 @@ let Game = {
 			for (let x = 0; x < this.boardSize; x++) {
 				let cell = document.createElement("td");
 				let img = document.createElement("img");
+				let piece;
+				for (i = 0; i < this.pieces.length; i++) {
+					if (this.pieces[i].id == Pairing.getID(x, y)) {
+						piece = this.pieces[i];
+						break;
+					}
+				}
+				img.onclick = function () {
+					piece.showPossibleMoves();
+				};
 
 				img.id = Pairing.getID(x, y);
 
-				img.src = this.decideCellSrc(x, y);
+				img.src = this.decideCellSrc(x, y, piece);
 				cell.appendChild(img);
 				row.appendChild(cell);
 			}
@@ -83,15 +93,7 @@ let Game = {
 			parent.remove();
 		}
 	},
-	decideCellSrc: function (x, y) {
-		let piece;
-		for (i = 0; i < this.pieces.length; i++) {
-			if (this.pieces[i].id == Pairing.getID(x, y)) {
-				piece = this.pieces[i];
-				break;
-			}
-		}
-
+	decideCellSrc: function (x, y, piece) {
 		if (x % 2 == 0) {
 			if (y % 2 == 0) {
 				if (piece) {
@@ -143,7 +145,12 @@ class GamePiece {
 		this.y = y;
 		this.id = id;
 	}
-	showPossibleMoves() {}
+	showPossibleMoves(piece) {
+		console.log(piece);
+		x = this.x;
+		y = this.y;
+		id = this.id;
+	}
 	movePiece() {}
 }
 
