@@ -32,8 +32,16 @@ let Game = {
 				};
 
 				img.id = Pairing.getID(x, y);
-
-				img.src = this.decideCellSrc(x, y, piece);
+				src = this.decideCellSrc(x, y, piece);
+				img.src = src;
+				if (
+					src == "img/BlackSqrWithBlue.png" ||
+					src == "img/BlackSqrWithRed.png"
+				) {
+					img.occupied = true;
+				} else {
+					img.occupied = false;
+				}
 				cell.appendChild(img);
 				row.appendChild(cell);
 			}
@@ -155,28 +163,8 @@ class GamePiece {
 	}
 	movePiece() {}
 	checkUp() {}
-	checkDown() {
-		x = this.x;
-		y = this.y;
-
-		while (true) {
-			x--;
-			y++;
-			if (x < 0 || y > Game.boardSize) {
-				break;
-			}
-
-			let img = document.getElementById(Pairing.getID(x, y));
-			if (img != null) {
-				img.src = "img/GreenSqr.png";
-			} else {
-				break;
-			}
-		}
-	}
+	checkDown() {}
 }
-
-class scan extends GamePiece {}
 
 let Pairing = {
 	getID: function (x, y) {
