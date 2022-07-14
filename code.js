@@ -7,6 +7,7 @@ let Game = {
 	pieces: [],
 	area: document.createElement("div"),
 	board: document.createElement("table"),
+	selectedPiece: [],
 
 	load: function () {
 		this.setBoard();
@@ -27,8 +28,14 @@ let Game = {
 						break;
 					}
 				}
-				img.onclick = function () {
-					piece.showPossibleMoves();
+				img.onclick = function (img) {
+					Game.selectedPiece = piece;
+					if (piece) {
+						piece.showPossibleMoves();
+					}
+					if (!this.occupied && Game.selectedPiece != null) {
+						Game.selectedPiece.movePiece(this.id);
+					}
 				};
 
 				img.id = Pairing.getID(x, y);
@@ -154,6 +161,10 @@ class GamePiece {
 		this.id = id;
 	}
 	showPossibleMoves() {
+		if (this != Game.selectedPiece) {
+			Game.renderBoard();
+		}
+
 		console.log(this);
 		if (this.colour == "RED") {
 			this.checkDown();
@@ -161,9 +172,37 @@ class GamePiece {
 			this.checkUp();
 		}
 	}
-	movePiece() {}
-	checkUp() {}
-	checkDown() {}
+	movePiece() {
+		console.log("moving a piece");
+	}
+	checkUp() {
+		x = this.x;
+		y = this.y;
+
+		var img = document.getElementById(Pairing.getID(x - 1, y - 1));
+
+		if (img.occupied == false) {
+			img.src = "img/GreenSqr.png";
+		}
+		var img = document.getElementById(Pairing.getID(x + 1, y - 1));
+		if (img.occupied == false) {
+			img.src = "img/GreenSqr.png";
+		}
+	}
+	checkDown() {
+		x = this.x;
+		y = this.y;
+
+		var img = document.getElementById(Pairing.getID(x - 1, y + 1));
+
+		if (img.occupied == false) {
+			img.src = "img/GreenSqr.png";
+		}
+		var img = document.getElementById(Pairing.getID(x + 1, y + 1));
+		if (img.occupied == false) {
+			img.src = "img/GreenSqr.png";
+		}
+	}
 }
 
 let Pairing = {
